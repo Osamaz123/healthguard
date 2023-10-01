@@ -33,9 +33,9 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
     private val viewModel: AuthViewModel by viewModels()
     private val binding: ActivityMainBinding by viewBinding(CreateMethod.INFLATE)
-    private val newsAdapter: NewsAdapter by lazy {
-        NewsAdapter(applicationContext.assets.readJson("news.json").getJSONArray("news"))
-    }
+//    private val newsAdapter: NewsAdapter by lazy {
+//        NewsAdapter(applicationContext.assets.readJson("news.json").getJSONArray("news"))
+//    }
 
     @Inject
     lateinit var prefs: PreferencesHelper
@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
             } else {
                 setupLayout()
                 setupCoreFunctions()
-                setupNews()
+              //  setupNews()
                 setupBottomNavigation()
             }
         }
@@ -104,13 +104,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupNews() {
-        binding.rvNews.apply {
-            setHasFixedSize(true)
-            adapter = newsAdapter
-            layoutManager = LinearLayoutManager(applicationContext)
-        }
-    }
+//    private fun setupNews() {
+//        binding.rvNews.apply {
+//            setHasFixedSize(true)
+//            adapter = newsAdapter
+//            layoutManager = LinearLayoutManager(applicationContext)
+//        }
+//    }
 
     private fun setupBottomNavigation() {
         binding.bottomNavigation.setOnItemSelectedListener {
