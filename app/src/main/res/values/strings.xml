@@ -1,0 +1,93 @@
+<resources>
+    <!-- Meta -->
+    <string name="app_name">SkinCan</string>
+    <string name="app_logo">App Logo</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_image">Onboarding Image</string>
+    <string name="onboard_title1">Check a potential cancer through camera</string>
+    <string name="onboard_subtitle1">You can use camera to check a potential risk cancer on your skin.</string>
+    <string name="onboard_title2">Get some tips</string>
+    <string name="onboard_subtitle2">You’ll get some tips for avoiding a cancer skin  this can help you to minimize potential skin cancer risk</string>
+    <string name="onboard_continue">Start Now</string>
+    <string name="onboarding_page_indicator">Onboarding Page Indicator</string>
+
+    <!-- Camera -->
+    <string name="gallery">gallery</string>
+    <string name="close_button">close button</string>
+    <string name="torch_camera">torch camera</string>
+    <string name="flip_camera">flip camera</string>
+    <string name="capture_image">capture image</string>
+    <string name="failed_open_camera">failed to open camera</string>
+    <string name="captured_image_preview">captured image preview</string>
+
+    <!-- Camera (Scanner) -->
+    <string name="scanner_corner">scanner corner</string>
+    <string name="scanner_line">scanner line</string>
+    <string name="scan">Scan</string>
+
+    <!-- Auth -->
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Log in</string>
+    <string name="continue_with_google">Continue with Google</string>
+    <string name="invalid_email">The email address you\'ve entered is invalid!</string>
+    <string name="password_length">Password must be longer than 8 characters!</string>
+    <string name="input_cant_be_empty">%s can\'t be empty!</string>
+    <string name="auth_fail_desc">We’re sorry, something went wrong, please try again.</string>
+
+    <!-- Auth (Login) -->
+    <string name="welcome_back">Welcome Back</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="no_account">Didn\'t have an account?</string>
+    <string name="register_now">Register Now</string>
+    <string name="login_fail">Failed to log in</string>
+    <string name="login_fail_desc">The email address or password you\'ve entered is invalid!</string>
+
+    <!-- Auth (Register) -->
+    <string name="register">Register</string>
+    <string name="register_instruction">Fill form below to create your account</string>
+    <string name="create_account">Create Account</string>
+    <string name="have_account">Already have an account?</string>
+    <string name="login_now">Login Now</string>
+
+    <!-- Auth (Dialog) -->
+    <string name="default_web_client_id" translatable="false">231322069878-gb9mvjgvj8df59hsgpntje44daikg4ag.apps.googleusercontent.com</string>
+
+    <string name="dialog_illustration">Dialog Illustration</string>
+    <string name="login_instruction">Now you can log in to your new account and start exploring the app</string>
+    <string name="account_created">Account has been created</string>
+    <string name="register_fail">Failed to create account</string>
+    <string name="try_again">Try Again</string>
+    <string name="register_fail_email_desc">The email address you\'ve entered is already in use!</string>
+
+    <!-- Dashboard -->
+    <string name="greeting">Hello</string>
+    <string name="user_name">user_Name</string>
+    <string name="emoji_description">this is emoji</string>
+    <string name="placeholder_user_profile">placeholder user profile</string>
+    <string name="what_s_going_on">What\'s going on?</string>
+    <string name="place_holder_for_pict_news">place holder for pict news</string>
+    <string name="home_nav_description">this is home navigation</string>
+    <string name="camera_nav_description">camera nav description</string>
+
+    <!-- Settings -->
+    <string name="dark_mode">Dark Mode</string>
+    <string name="logout">Log Out</string>
+
+    <!-- Unsorted -->
+    <string name="licenses">Open Source Licenses</string>
+    <string name="result_pict">Result Pict</string>
+    <string name="result">Result</string>
+    <string name="clear">Clear</string>
+    <string name="home">Home</string>
+    <string name="scan_again">Scan Again</string>
+    <string name="last_result">Last Result</string>
+    <string name="error_general">Something went wrong.</string>
+    <string name="result_scanned_at">Scanned at: %s</string>
+    <string name="last_scan">Last checked: %s</string>
+    <string name="see_more">See more</string>
+
+
+</resources>

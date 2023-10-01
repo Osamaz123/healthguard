@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    tools:context=".ui.main.MainActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/content_wrapper">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:descendantFocusability="blocksDescendants"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="24dp"
+                android:layout_width="wrap_content"
+                android:text="@string/greeting"
+                android:textColor="@color/primary"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/greetings" />
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_width="wrap_content"
+                android:textColor="@color/primary"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/greetings"
+                tools:text="@string/user_name"
+                android:id="@+id/user_name" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="6dp"
+                android:elevation="16dp"
+                android:text="👋"
+                android:textSize="28sp"
+                app:layout_constraintBottom_toTopOf="@+id/user_name"
+                app:layout_constraintStart_toEndOf="@+id/greetings"
+                app:layout_constraintTop_toTopOf="@+id/greetings"
+                tools:ignore="HardcodedText" />
+
+            <ImageButton
+                android:background="@drawable/bg_oval_ripple"
+                android:contentDescription="@string/placeholder_user_profile"
+                android:layout_height="60dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_width="60dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_avatar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/btn_profile" />
+
+            <include
+                layout="@layout/result_card"
+                android:layout_height="196dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_width="match_parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_profile"
+                android:id="@+id/result_card" />
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_width="wrap_content"
+                android:text="@string/what_s_going_on"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.068"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/result_card"
+                android:id="@+id/textView" />
+
+            <!-- TODO: Replace with RecyclerView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:nestedScrollingEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                android:id="@+id/rv_news" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:elevation="0dp"
+        android:layout_height="80dp"
+        android:layout_width="match_parent"
+        app:itemRippleColor="@color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/bottom_nav"
+        android:id="@+id/bottom_navigation" />
+</androidx.constraintlayout.widget.ConstraintLayout>
