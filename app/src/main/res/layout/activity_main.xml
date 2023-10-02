@@ -22,7 +22,7 @@
 
             <include
                 android:id="@+id/lungs_disease_card"
-                layout="@layout/result_card"
+                layout="@layout/lungs_disease_card"
                 android:layout_width="match_parent"
                 android:layout_height="196dp"
                 android:layout_marginTop="8dp"
