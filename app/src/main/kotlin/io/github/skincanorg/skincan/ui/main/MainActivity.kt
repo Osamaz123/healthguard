@@ -25,6 +25,7 @@ import io.github.skincanorg.skincan.lib.Extension.toDateTime
 import io.github.skincanorg.skincan.ui.OnboardingActivity
 import io.github.skincanorg.skincan.ui.auth.AuthViewModel
 import io.github.skincanorg.skincan.ui.camera.CameraActivity
+import io.github.skincanorg.skincan.ui.diseases.LungsDiseaseActivity
 import io.github.skincanorg.skincan.ui.preference.ProfileActivity
 import io.github.skincanorg.skincan.ui.result.ResultListActivity
 import javax.inject.Inject
@@ -99,6 +100,11 @@ class MainActivity : AppCompatActivity() {
                         R.string.last_scan,
                         results[0].scannedAt.toDateTime("d MMM YYYY"),
                     )
+                }
+            }
+            lungsDiseaseCard.apply {
+                root.setOnClickListener {
+                    startActivity(Intent(this@MainActivity, LungsDiseaseActivity::class.java))
                 }
             }
         }

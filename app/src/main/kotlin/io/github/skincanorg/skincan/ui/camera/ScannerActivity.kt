@@ -227,6 +227,8 @@ class ScannerActivity : AppCompatActivity() {
                         finish()
                     }
                 }
-            }.addOnFailureListener { finish() }
+            }.addOnFailureListener {
+                Toast.makeText(this@ScannerActivity,"Failed",Toast.LENGTH_LONG).show()
+                finish() }
     }
 }

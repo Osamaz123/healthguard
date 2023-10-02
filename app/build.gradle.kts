@@ -54,6 +54,14 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
+    android {
+        sourceSets {
+            getByName("main") {
+                java.srcDir("src/main/kotlin")
+            }
+        }
+    }
+
     kotlinOptions {
         jvmTarget = "11"
         freeCompilerArgs = freeCompilerArgs + listOf(
