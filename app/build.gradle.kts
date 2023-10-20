@@ -92,6 +92,9 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.5.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("org.tensorflow:tensorflow-lite-metadata:0.1.0")
+    implementation("org.tensorflow:tensorflow-lite:2.6.0")
+
     kapt(Library.App.hiltCompiler)
     implementation(Library.App.googleAuth)
     implementation(platform(Library.App.Firebase.bom))
@@ -123,4 +126,7 @@ dependencies {
 android {
     compileSdk = 33
     buildToolsVersion = "32.0.0"
+    buildFeatures {
+        mlModelBinding = true
+    }
 }

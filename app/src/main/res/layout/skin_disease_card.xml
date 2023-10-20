@@ -39,12 +39,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.396"
-            app:srcCompat="@drawable/lungs_img" />
+            app:srcCompat="@drawable/skin_disease_img" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lungs disease"
+            android:text="Skin disease"
             android:textColor="?attr/colorOnPrimary"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@+id/imageView"

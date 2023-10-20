@@ -13,7 +13,8 @@
         app:subtitleCentered="true"
         app:titleCentered="true"
         tools:title="test"
-        tools:visibility="gone"
+        app:titleTextColor="@color/black"
+        tools:visibility="visible"
         android:id="@+id/appbar" />
 
     <androidx.cardview.widget.CardView

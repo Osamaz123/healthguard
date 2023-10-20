@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="sex_list_item">
+        <item>Female</item>
+        <item>Male</item>
+    </array>
+
+    <array name="chestpain_list_item">
+        <item>Typical Angina</item>
+        <item>Atypical Angina</item>
+        <item>Non-angina pain</item>
+        <item>Asymptomatic</item>
+    </array>
+
+    <array name="fbs_list_item">
+        <item>No</item>
+        <item>Yes</item>
+    </array>
+
+    <array name="exang_list_item">
+        <item>No</item>
+        <item>Yes</item>
+    </array>
+
+</resources>
