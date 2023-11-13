@@ -10,6 +10,7 @@ package io.github.skincanorg.skincan.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,6 +29,7 @@ import io.github.skincanorg.skincan.ui.camera.CameraActivity
 import io.github.skincanorg.skincan.ui.diseases.CvdDiseaseActivity
 import io.github.skincanorg.skincan.ui.diseases.LungsDiseaseActivity
 import io.github.skincanorg.skincan.ui.preference.ProfileActivity
+import io.github.skincanorg.skincan.ui.result.ResultActivity
 import io.github.skincanorg.skincan.ui.result.ResultListActivity
 import javax.inject.Inject
 
@@ -104,8 +106,9 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
 
-                R.id.camera -> {
-                    startActivity(Intent(this@MainActivity, CameraActivity::class.java))
+                R.id.chat_bot -> {
+                    Toast.makeText(this, "Chatbot clicked", Toast.LENGTH_SHORT).show()
+                    // startActivity(Intent(this@MainActivity, ResultActivity::class.java))
                     false // Do not highlight
                 }
 

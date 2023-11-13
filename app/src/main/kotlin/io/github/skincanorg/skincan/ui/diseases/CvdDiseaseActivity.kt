@@ -1,7 +1,9 @@
 package io.github.skincanorg.skincan.ui.diseases
 
+import android.content.res.AssetManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -14,6 +16,16 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.textfield.TextInputEditText
 import io.github.skincanorg.skincan.R
 import io.github.skincanorg.skincan.databinding.ActivityCvdDiseaseBinding
+import io.github.skincanorg.skincan.ml.HeartDiseaseModel
+import org.tensorflow.lite.DataType
+import org.tensorflow.lite.Interpreter
+import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
+import java.io.FileInputStream
+import java.io.IOException
+import java.nio.ByteBuffer
+import java.nio.ByteOrder
+import java.nio.MappedByteBuffer
+import java.nio.channels.FileChannel
 
 class CvdDiseaseActivity : AppCompatActivity() {
      private val binding: ActivityCvdDiseaseBinding by viewBinding(CreateMethod.INFLATE)
@@ -218,14 +230,16 @@ class CvdDiseaseActivity : AppCompatActivity() {
             if (checkIsEmpty(valueAge) || checkIsEmpty(valueTrestbps) || checkIsEmpty(valueChol) || checkIsEmpty(valueRestecg) || checkIsEmpty(valueThalach) ||
                 checkIsEmpty(valueOldpeak) || checkIsEmpty(valueSlope) || checkIsEmpty(valueCa) || checkIsEmpty(valueThal)) {
                 Toast.makeText(this, "Please enter all the information!", Toast.LENGTH_SHORT).show()
+            } else{
+                // Perform inference with the TFLite model
+                val result = performInference()
+
+                // Display the result in cvd_result TextView
+                binding.cvdResult.text = "$result"
             }
 
 
-            // Perform inference with the TFLite model
-            val result = performInference()
 
-            // Display the result in cvd_result TextView
-            binding.cvdResult.text = "CVD Result: $result"
         }
     }
 
@@ -234,16 +248,56 @@ class CvdDiseaseActivity : AppCompatActivity() {
     }
 
     private fun performInference(): String {
-        // Load your TFLite model here (similar to the previous code)
-        // Create and load the input buffer with user-entered data
-        // Run inference
+        try {
+            val tflite = HeartDiseaseModel.newInstance(this) // Replace "this" with your context
 
-        // Replace the following with actual model inference
-        val modelResult = "Healthy" // Replace with the actual model result
+            // Prepare input data
+            val inputBuffer = ByteBuffer.allocateDirect(4 * 13).order(ByteOrder.nativeOrder())
 
-        return modelResult
+            // Assuming the model expects the data in the following order: int, int, int, int, int, int, int, int, int, float, int, int, int
+            inputBuffer.putFloat(valueAge.toFloat())       // age
+            inputBuffer.putInt(sexValue)               // sex
+            inputBuffer.putInt(chestPainValue)         // cp
+            inputBuffer.putFloat(valueTrestbps.toFloat())  // trestbps
+            inputBuffer.putFloat(valueChol.toFloat())      // chol
+            inputBuffer.putInt(fbsValue)              // fbs
+            inputBuffer.putFloat(valueRestecg.toFloat())   // restecg
+            inputBuffer.putFloat(valueThalach.toFloat())  // thalach
+            inputBuffer.putInt(exangValue)            // exang
+            inputBuffer.putFloat(valueOldpeak.toFloat()) // oldpeak
+            inputBuffer.putFloat(valueSlope.toFloat())      // slope
+            inputBuffer.putFloat(valueCa.toFloat())          // ca
+            inputBuffer.putFloat(valueThal.toFloat())        // thal
+
+            // Reset the buffer position for reading
+           inputBuffer.rewind()
+
+            // Create a TensorBuffer from the inputBuffer
+            val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 13), DataType.FLOAT32)
+            inputFeature0.loadBuffer(inputBuffer)
+            Log.d("InputValues", "Age: $valueAge, Sex: $sexValue, ChestPain: $chestPainValue, ...")
+
+            // Runs model inference and gets result
+            val outputs = tflite.process(inputFeature0)
+            val outputFeature0 = outputs.outputFeature0AsTensorBuffer
+
+            // Get the model's output
+            val modelResult = outputFeature0.floatArray[0]*100 // Assuming it's a single float result
+
+            // Close the TFLite interpreter
+            tflite.close()
+
+            val roundedResult = String.format("%.2f", modelResult)
+            return "Predicted probability for heart disease $roundedResult %"
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+            return "Error: ${ex.message}"
+        }
     }
+
+
 }
+
 
 
 

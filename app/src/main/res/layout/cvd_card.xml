@@ -39,7 +39,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.396"
-            app:srcCompat="@drawable/cvd_image" />
+            app:srcCompat="@drawable/cvd_img" />
 
         <TextView
             android:layout_width="wrap_content"
