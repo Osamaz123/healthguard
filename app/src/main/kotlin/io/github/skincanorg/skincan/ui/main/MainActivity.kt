@@ -90,13 +90,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-//    private fun setupNews() {
-//        binding.rvNews.apply {
-//            setHasFixedSize(true)
-//            adapter = newsAdapter
-//            layoutManager = LinearLayoutManager(applicationContext)
-//        }
-//    }
+
 
     private fun setupBottomNavigation() {
         binding.bottomNavigation.setOnItemSelectedListener {

@@ -93,16 +93,6 @@
                 tools:text="Great!\nYou’re clear from skin cancer\n\nStay safe from cancer risk potential"
                 android:id="@+id/tv_result_desc" />
 
-            <TextView
-                android:gravity="center"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:layout_marginHorizontal="26dp"
-                android:layout_width="match_parent"
-                android:text="@string/result_scanned_at"
-                android:textColor="@color/colorSubtitle"
-                android:textSize="12sp"
-                android:id="@+id/tv_result_time" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

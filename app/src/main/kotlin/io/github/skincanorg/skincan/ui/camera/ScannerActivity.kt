@@ -8,6 +8,7 @@
 
 package io.github.skincanorg.skincan.ui.camera
 
+import android.content.ContextWrapper
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -30,8 +31,11 @@ import io.github.skincanorg.skincan.Database
 import io.github.skincanorg.skincan.R
 import io.github.skincanorg.skincan.databinding.ActivityScannerBinding
 import io.github.skincanorg.skincan.lib.Util
+import io.github.skincanorg.skincan.ui.diseases.LungsDiseaseActivity
 import io.github.skincanorg.skincan.ui.result.ResultActivity
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -45,6 +49,9 @@ import org.tensorflow.lite.support.image.ops.ResizeOp
 import org.tensorflow.lite.support.label.TensorLabel
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 import java.io.*
+import java.nio.ByteBuffer
+import java.nio.ByteOrder
+import java.nio.MappedByteBuffer
 import java.nio.channels.FileChannel
 import javax.inject.Inject
 
@@ -54,6 +61,21 @@ class ScannerActivity : AppCompatActivity() {
     private var shouldLoop = false
     private var looped = true
     private lateinit var image: Bitmap
+    private lateinit var tflite: Interpreter
+    private val scope = CoroutineScope(Dispatchers.Main)
+    // Define the number of classes in your model
+    private  val NUM_CLASSES = 7 // Replace with the actual number of classes in your model
+
+    // Define the class labels
+    private val classLabels = arrayOf(
+        "actinic keratosis",
+        "basal cell carcinoma",
+        "nevus",
+        "melanoma",
+        "vascular lesion",
+        "dermatofibroma",
+        "benign keratosis"
+    )
 
     @Inject
     lateinit var database: Database
@@ -111,124 +133,111 @@ class ScannerActivity : AppCompatActivity() {
 
                 },
             )
+            // Initialize the TFLite interpreter
+            tflite = Interpreter(loadModelFile())
 
             btnScan.setOnClickListener {
                 shouldLoop = true
                 root.transitionToState(R.id.loop_start, 1)
 
-                doPrediction(image)
+
+                // Introduce a delay before calling doPrediction
+                scope.launch {
+                    delay(2000) // Adjust the delay duration as needed (in milliseconds)
+                    doPrediction(image)
+                }
             }
 
             btnCancel.setOnClickListener {
                 finish()
             }
         }
+
+
+    }
+    private fun loadModelFile(): MappedByteBuffer {
+        val modelFilename = "model12345_quantized.tflite" // Replace with your actual model file name
+        val assetFileDescriptor = assets.openFd(modelFilename)
+        val inputStream = FileInputStream(assetFileDescriptor.fileDescriptor)
+        val fileChannel = inputStream.channel
+        val startOffset = assetFileDescriptor.startOffset
+        val declaredLength = assetFileDescriptor.declaredLength
+        return fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength)
     }
 
+    // Perform prediction using TFLite model
     private fun doPrediction(bitmap: Bitmap) {
-        FirebaseModelDownloader.getInstance()
-            .getModel(
-                "CancerDetector",
-                DownloadType.LOCAL_MODEL_UPDATE_IN_BACKGROUND,
-                CustomModelDownloadConditions.Builder().build(),
-            )
-            .addOnSuccessListener { model ->
-                val modelFile = model?.file ?: return@addOnSuccessListener
-                val interpreter = Interpreter(modelFile)
+        // Preprocess the input image
+        val inputTensor = preprocessImage(bitmap)
 
-                val inputShape = interpreter.getInputTensor(0).shape()
-                val inputSize = Size(inputShape[2], inputShape[1])
+        // Run inference
+        val outputTensor = TensorBuffer.createFixedSize(intArrayOf(1, NUM_CLASSES), DataType.FLOAT32)
+        tflite.run(inputTensor.buffer, outputTensor.buffer.rewind())
 
-                val imgProcessor = ImageProcessor.Builder()
-                    .add(
-                        ResizeOp(
-                            inputSize.height, inputSize.width, ResizeOp.ResizeMethod.BILINEAR,
-                        ),
-                    )
-                    .add(NormalizeOp(0f, 1f))
-                    .build()
-                val tensorImage = imgProcessor.process(TensorImage(DataType.FLOAT32).apply { load(bitmap) })
+        // Get the predicted class index
+        val predictedClassIndex = outputTensor.intArray[0]
 
-                val modelOutput = TensorBuffer.createFixedSize(interpreter.getOutputTensor(0).shape(), DataType.FLOAT32)
+        // Get the predicted class name
+        val predictedClassName = classLabels[predictedClassIndex]
 
-                interpreter.run(tensorImage.buffer, modelOutput.buffer.rewind())
+        // Get the confidence score
+        val confidenceScore = outputTensor.floatArray[0]
 
-                val probProcessor = TensorProcessor.Builder()
-                    .add(NormalizeOp(0f, 1f))
-                    .build()
+        val resultString = "Predicted class: $predictedClassName\nConfidence: ${confidenceScore * 100}%"
 
-                val labels = TensorLabel(
-                    BufferedReader(
-                        InputStreamReader(assets.open("model_labels.txt")),
-                    ).readLines(),
-                    probProcessor.process(modelOutput),
-                )
-
-                val resultMap = labels.mapWithFloatValue
-
-                var result = "Clear"
-                var lastHighest = .50f
-                resultMap.keys.forEach {
-                    val value = resultMap[it] as Float
-                    if (value >= lastHighest) {
-                        if (value != lastHighest)
-                            lastHighest = value
-                        result = StringBuilder().apply {
-                            append("$it ")
-                            append(String.format("%.2f", value))
-                        }.toString()
-                    }
-                    Log.d(
-                        "ziML",
-                        StringBuilder().apply {
-                            append("$it ")
-                            append(String.format("%.2f", value))
-                        }.toString(),
-                    )
-                }
-
-                Log.d("ziML", result)
-
-                lifecycleScope.launch(Dispatchers.IO) {
-                    delay(3000L)
-                    val q = database.resultsQueries
-
-                    val currentTime = System.currentTimeMillis() / 1000
-                    val cacheDir = Util.getCacheDir(applicationContext, "results")
-
-                    var outChan: FileChannel? = null
-                    var inChan: FileChannel? = null
-                    val newFile = File(cacheDir, currentTime.toString())
-                    try {
-                        outChan = FileOutputStream(newFile).channel
-                        inChan = FileInputStream(photoFile).channel
-                        inChan.transferTo(0, inChan.size(), outChan)
-                        inChan.close()
-                        photoFile!!.delete()
-                    } finally {
-                        inChan?.close()
-                        outChan?.close()
-                    }
-
-                    val path = newFile.path
-                    q.insert(path, result, currentTime)
-
-                    withContext(Dispatchers.Main) {
-                        Toast.makeText(this@ScannerActivity, "ML Result: $result", Toast.LENGTH_LONG).show()
-                        startActivity(
-                            Intent(this@ScannerActivity, ResultActivity::class.java).apply {
-                                putExtra(ResultActivity.PHOTO_PATH, path)
-                                putExtra(ResultActivity.RESULT, result)
-                                putExtra(ResultActivity.TIMESTAMP, currentTime)
-                                putExtra(ResultActivity.FROM, 0)
-                            },
-                        )
-                        shouldLoop = false
-                        finish()
-                    }
-                }
-            }.addOnFailureListener {
-                Toast.makeText(this@ScannerActivity,"Failed",Toast.LENGTH_LONG).show()
-                finish() }
+        // Suggestive message based on the prediction
+        val suggestionMessage = when {
+            confidenceScore >= 0.8 -> "High confidence! This looks like a $predictedClassName. We recommend consulting a healthcare professional for further evaluation."
+            confidenceScore >= 0.5 -> "Moderate confidence. It could be a $predictedClassName. It's advisable to seek a medical opinion for confirmation."
+            else -> "Low confidence. The result is inconclusive. We recommend consulting a healthcare professional for a more accurate assessment."
+        }
+        // Pass the result string and image path to LungsDiseaseActivity
+        val intent = Intent(this, LungsDiseaseActivity::class.java)
+        intent.putExtra("resultString", resultString)
+        intent.putExtra("suggestionMessage", suggestionMessage)
+        intent.putExtra("imagePath", saveImageToInternalStorage(bitmap)) // Save image to internal storage and pass the path
+        startActivity(intent)
     }
+
+    private fun preprocessImage(bitmap: Bitmap): TensorImage {
+        // Create TFLite input tensor from the bitmap
+        var inputTensor = TensorImage(DataType.FLOAT32)
+        inputTensor.load(bitmap)
+
+        // Preprocess the input image
+        val imageProcessor = ImageProcessor.Builder()
+            .add(ResizeOp(224, 224, ResizeOp.ResizeMethod.BILINEAR))
+            .add(NormalizeOp(0f, 255f))
+            .build()
+
+        inputTensor = imageProcessor.process(inputTensor)
+
+        return inputTensor
+    }
+    private fun saveImageToInternalStorage(bitmap: Bitmap): String {
+        val wrapper = ContextWrapper(applicationContext)
+        var file = wrapper.getDir("images", MODE_PRIVATE)
+        file = File(file, "${System.currentTimeMillis()}.jpg")
+
+        try {
+            val stream: OutputStream = FileOutputStream(file)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+            stream.flush()
+            stream.close()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+
+        return file.absolutePath
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        // Cancel the coroutine scope to avoid potential memory leaks
+        scope.cancel()
+    }
+
+
+
 }
