@@ -4,9 +4,14 @@
         android:icon="@drawable/ic_home"
         android:title="Home"
         android:id="@+id/home" />
+<!--    <item-->
+<!--        android:icon="@drawable/baseline_chat_24"-->
+<!--        android:title="Chat bot"-->
+<!--        android:id="@+id/chat_bot" />-->
+
     <item
-        android:icon="@drawable/baseline_chat_24"
-        android:title="Chat bot"
-        android:id="@+id/chat_bot" />
+        android:icon="@drawable/baseline_monitor_heart_24"
+        android:title="Vital Signs"
+        android:id="@+id/vital_signs" />
 
 </menu>

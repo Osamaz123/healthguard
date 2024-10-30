@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="io.github.skincanorg.skincan">
+    package="io.com.example.healthguard">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission
@@ -18,19 +18,20 @@
         android:theme="@style/Theme.SkinCan"
         tools:ignore="LockedOrientationActivity">
         <activity
+            android:name=".ui.vitalsigns.VitalSignsActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.diseases.SkinDiseaseActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.diseases.CvdDiseaseActivity"
             android:exported="false" />
         <activity
             android:name=".ui.diseases.LungsDiseaseActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.result.ResultListActivity"
-            android:exported="true" />
-        <activity
             android:name=".ui.result.ResultActivity"
-            android:exported="true" />
-        <activity
-            android:name=".ui.preference.LicensesActivity"
             android:exported="true" />
         <activity
             android:name=".ui.preference.PreferenceActivity"

@@ -41,7 +41,7 @@
         app:layout_constraintTop_toBottomOf="@id/onboarding_container"
         android:id="@+id/indicator_page2" />
 
-    <io.github.skincanorg.skincan.widget.button.RoundedButton
+    <io.com.example.healthguard.widget.button.RoundedButton
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
         android:layout_width="match_parent"

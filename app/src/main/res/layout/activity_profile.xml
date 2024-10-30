@@ -57,7 +57,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv_email"
         android:id="@+id/preference_container" />
 
-    <io.github.skincanorg.skincan.widget.button.RoundedStrokeButton
+    <io.com.example.healthguard.widget.button.RoundedStrokeButton
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
         android:layout_width="match_parent"

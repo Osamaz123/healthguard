@@ -44,7 +44,7 @@
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/bg_rounded_ripple_stroke"
                 tools:ignore="NotSibling">
-                <!-- Rest of the layout goes here -->
+
 
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -62,6 +62,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_ha_age"
+                    android:hint="20"
                     android:layout_marginLeft="50dp"
                     android:layout_marginRight="50dp"
                     android:layout_marginBottom="10dp"
@@ -153,6 +154,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_ha_trestbps"
                     android:layout_marginLeft="50dp"
+                    android:hint="125"
                     android:layout_marginRight="50dp"
                     android:layout_marginBottom="10dp"
                     android:inputType="numberDecimal" />
@@ -183,6 +185,7 @@
                     android:layout_below="@id/tv_ha_chol"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="212"
                     android:layout_marginBottom="10dp"
                     android:layout_marginLeft="50dp"
                     android:layout_marginRight="50dp"
@@ -277,6 +280,7 @@
                     android:layout_below="@id/tv_ha_thalach"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="168"
                     android:layout_marginBottom="10dp"
                     android:layout_marginLeft="50dp"
                     android:layout_marginRight="50dp"
@@ -340,6 +344,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginLeft="50dp"
                     android:layout_marginRight="50dp"
+                    android:hint="1"
                     android:inputType="numberDecimal" />
             </RelativeLayout>
             <RelativeLayout
@@ -447,18 +452,6 @@
 
                 android:layout_centerHorizontal="true" />
 
-            <TextView
-                android:id="@+id/cvd_result"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/btn_ha_checkup"
-                android:layout_marginLeft="100dp"
-                android:layout_marginRight="100dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginBottom="50dp"
-
-                android:layout_centerHorizontal="true"
-                android:text="Result" />
         </RelativeLayout>
 
 

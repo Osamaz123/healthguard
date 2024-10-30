@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_width="match_parent">
 
-    <io.github.skincanorg.skincan.widget.button.RoundedButton
+    <io.com.example.healthguard.widget.button.RoundedButton
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:id="@+id/button" />

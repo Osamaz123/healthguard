@@ -1,14 +1,16 @@
 <resources>
     <!-- Meta -->
-    <string name="app_name">SkinCan</string>
+    <string name="app_name">HealthGuard</string>
     <string name="app_logo">App Logo</string>
 
     <!-- Onboarding -->
     <string name="onboarding_image">Onboarding Image</string>
-    <string name="onboard_title1">Check a potential cancer through camera</string>
-    <string name="onboard_subtitle1">You can use camera to check a potential risk cancer on your skin.</string>
-    <string name="onboard_title2">Get some tips</string>
-    <string name="onboard_subtitle2">You’ll get some tips for avoiding a cancer skin  this can help you to minimize potential skin cancer risk</string>
+    <string name="onboard_title1">Protect Your Health with AI-Powered Early Detection</string>
+    <string name="onboard_subtitle1">Our app utilizes cutting-edge AI technology to analyze images and health parameters, helping you detect skin cancer,
+        lung disease, and cardiovascular disease in their early stages when treatment is most effective.</string>
+    <string name="onboard_title2">Embrace the Power of AI-Driven Self-Diagnosis</string>
+    <string name="onboard_subtitle2">Engage with our advanced self-diagnosis chatbot and get personalized insights,
+        tailored advice, and expert guidance to make informed decisions about your health.</string>
     <string name="onboard_continue">Start Now</string>
     <string name="onboarding_page_indicator">Onboarding Page Indicator</string>
 
@@ -53,7 +55,7 @@
     <string name="login_now">Login Now</string>
 
     <!-- Auth (Dialog) -->
-    <string name="default_web_client_id" translatable="false">231322069878-gb9mvjgvj8df59hsgpntje44daikg4ag.apps.googleusercontent.com</string>
+<!--    <string name="default_web_client_id" translatable="false">231322069878-gb9mvjgvj8df59hsgpntje44daikg4ag.apps.googleusercontent.com</string>-->
 
     <string name="dialog_illustration">Dialog Illustration</string>
     <string name="login_instruction">Now you can log in to your new account and start exploring the app</string>

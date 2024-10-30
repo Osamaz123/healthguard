@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp"
+    tools:context=".ui.vitalsigns.VitalSignsActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+    <!-- Header Section -->
+    <TextView
+        android:id="@+id/tvHealthMonitoringHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Health Monitoring"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:padding="16dp"/>
+
+    <!-- CardView for Heart Rate -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewHeartRate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvHealthMonitoringHeader"
+        android:layout_marginTop="28dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:gravity="center_vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageViewHeartbeat"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_heartbeat"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="2"
+                android:gravity="end|center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Heart Rate"
+                    android:textSize="30sp"/>
+
+                <TextView
+                    android:id="@+id/tvHeartRateValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-- bpm"
+                    android:textSize="32sp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+    <!-- CardView for Body Temperature -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewBodyTemperature"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cardViewHeartRate"
+        android:layout_marginTop="10dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:gravity="center_vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageViewThermometer"
+                android:layout_width="0dp"
+                android:layout_height="94dp"
+                android:src="@drawable/ic_thermometer"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="2"
+            android:gravity="end|center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Body Temperature"
+                android:gravity="end"
+                android:textSize="30sp"/>
+
+            <TextView
+                android:id="@+id/tvBodyTemperatureValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="-- °C"
+                android:textSize="32sp"/>
+        </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+        <!-- CardView for SPO2 Value -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewSPO2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cardViewBodyTemperature"
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            app:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:gravity="center_vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imageViewSPO2"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/ic_spo2"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="2"
+                    android:gravity="end|center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SPO2"
+                        android:textSize="30sp"/>
+
+                    <TextView
+                        android:id="@+id/tvSPO2Value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="-- %"
+                        android:textSize="32sp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+
+
+    <!-- CardView for ECG Monitoring -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewECG"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cardViewSPO2"
+        android:layout_marginTop="10dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:cardUseCompatPadding="true">
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/lineChartECG"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:padding="16dp"
+         />
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>
+
+</ScrollView>

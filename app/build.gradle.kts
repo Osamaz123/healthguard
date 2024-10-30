@@ -104,6 +104,8 @@ dependencies {
     implementation(Library.App.Firebase.firestore)
     implementation(Library.App.Firebase.analytics)
     implementation(Library.App.Firebase.machineLearning)
+    implementation(Library.App.Firebase.database)
+
 
     // --- third parties ---
     implementation(Library.App.tensorflowLite)
@@ -124,6 +126,11 @@ dependencies {
 
     // --- desugaring ---
     coreLibraryDesugaring(Library.App.desugar)
+
+
+    implementation("de.hdodenhof:circleimageview:3.1.0")
+    implementation("com.github.PhilJay:MPAndroidChart:v3.0.3")
+
 }
 android {
     compileSdk = 33

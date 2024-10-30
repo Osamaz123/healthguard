@@ -106,7 +106,7 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <io.github.skincanorg.skincan.widget.button.RoundedButton
+    <io.com.example.healthguard.widget.button.RoundedButton
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
         android:layout_width="match_parent"
@@ -115,7 +115,7 @@
         app:layout_constraintTop_toBottomOf="@id/result_desc_wrapper"
         android:id="@+id/btn_home" />
 
-    <io.github.skincanorg.skincan.widget.button.RoundedStrokeButton
+    <io.com.example.healthguard.widget.button.RoundedStrokeButton
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
         android:layout_width="match_parent"

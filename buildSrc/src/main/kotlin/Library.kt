@@ -51,6 +51,7 @@ object Library {
             const val firestore = "com.google.firebase:firebase-firestore-ktx:24.1.2"
             const val storage = "com.google.firebase:firebase-storage-kts:20.0.1"
             const val machineLearning = "com.google.firebase:firebase-ml-modeldownloader-ktx:24.0.3"
+            const val database = "com.google.firebase:firebase-database-ktx:20.0.3"
         }
 
         const val tensorflowLite = "org.tensorflow:tensorflow-lite:2.8.0"

@@ -1,5 +1,5 @@
 object Android {
-    val applicationId = "io.github.skincanorg.skincan"
+    val applicationId = "io.com.example.healthguard"
     val compileSdk = 32
     val minSdk = 23
     val targetSdk = 32

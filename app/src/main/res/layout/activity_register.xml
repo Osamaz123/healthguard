@@ -35,7 +35,7 @@
         app:layout_constraintVertical_chainStyle="packed"
         android:id="@+id/tv_register_instruction" />
 
-    <io.github.skincanorg.skincan.widget.edittext.ValidateEditText
+    <io.com.example.healthguard.widget.edittext.ValidateEditText
         android:hint="@string/name"
         android:inputType="textPersonName"
         android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv_register_instruction"
         android:id="@+id/et_name" />
 
-    <io.github.skincanorg.skincan.widget.edittext.ValidateEditText
+    <io.com.example.healthguard.widget.edittext.ValidateEditText
         android:hint="@string/email"
         android:inputType="textEmailAddress"
         android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
         app:layout_constraintTop_toBottomOf="@id/et_name"
         android:id="@+id/et_email" />
 
-    <io.github.skincanorg.skincan.widget.edittext.ValidateEditText
+    <io.com.example.healthguard.widget.edittext.ValidateEditText
         android:hint="@string/password"
         android:inputType="textPassword"
         android:layout_height="wrap_content"
@@ -78,7 +78,7 @@
         app:passwordToggleEnabled="true"
         android:id="@+id/et_password" />
 
-    <io.github.skincanorg.skincan.widget.button.LoadingButton
+    <io.com.example.healthguard.widget.button.LoadingButton
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_width="0dp"
@@ -90,7 +90,7 @@
         app:layout_constraintTop_toBottomOf="@id/et_password"
         android:id="@+id/btn_register" />
 
-    <io.github.skincanorg.skincan.widget.button.LoadingButton
+    <io.com.example.healthguard.widget.button.LoadingButton
         android:layout_height="wrap_content"
         android:layout_width="0dp"
         android:text="@string/continue_with_google"
